@@ -1,0 +1,54 @@
+{% if user.is_authenticated %}
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url(wizklubimg.png);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+*{
+  box-sizing: border-box;
+}
+.btn{
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #F68206;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #8DDECB;
+}
+
+.btn:hover {background-color: #F68206}
+
+.btn:active {
+  background-color: #F68206;
+  box-shadow: 0 5px #8DDECB;
+  transform: translateY(4px);
+}
+
+
+
+</style>
+</head>
+<body>
+
+<form><br><br><br><br>
+<center><h1><u> Instructors </u></h1></center> <br><br><br><br>
+<div>
+	<center>
+		<a class="btn" href="newtickets.html">Report New Issue</a>
+	    <a class="btn" href="pendingissue.html">Pending Issue</a>
+	    <a class="btn" href="resolvedissue.html">Resolved Issue</a>
+	</center>
+
+</div>
+</form>
+</body>
+{% else %}
+<a href="/admin"> Login </a>
+{% endif %}

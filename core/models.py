@@ -1,0 +1,84 @@
+from django.db import models
+import os
+import sys
+sys.path.append(os.path.abspath('../students'))
+from students.models import Students
+from django.utils import timezone
+
+
+# teams
+NONE = 'None'
+TECH_TEAM = 'Technical Team'
+PARENT_ENGAG_TEAM = 'Parent Engagement Team'
+OPS_TEAM = 'Operation Team'
+SALES_TEAM = 'Sales Team'
+BUSINESS_DEV_TEAM = 'Business Development Team'
+
+# creating choices for teams
+teams = (
+    (NONE, 'None'),
+    (TECH_TEAM, 'Technical Team'),
+    (PARENT_ENGAG_TEAM, 'Parent Engagement Team'),
+    (OPS_TEAM, 'Operation Team'),
+    (SALES_TEAM, 'Sales Team'),
+    (BUSINESS_DEV_TEAM, 'Business Development Team')
+)
+
+
+# Create your models here.
+class Ticket(models.Model):
+    # issues
+    students = Students.objects.all()
+    students = [(student.id, student.student_name) for student in students]
+    OTHER_QUER = 'Other Queries'
+    BUG = 'Bug'
+    INSTRUC_ISS = 'Instructor Issue'
+    PE_ISS = 'PE Issues'
+    APP_REL = 'App Related'
+    WORK_SKILL_REL = 'Workouts/Skill Related'
+    WITHDRAW = 'Withdrawal'
+    BATCH_SCHED = 'Batch Scheduling'
+
+    # creating choices for issues
+    issues = [
+        (OTHER_QUER, 'Other Queries'),
+        (BUG, 'Bug'),
+        (INSTRUC_ISS, 'Instructor Issue'),
+        (PE_ISS, 'PE Issues'),
+        (APP_REL, 'App Related'),
+        (WORK_SKILL_REL, 'Workouts/Skill Related'),
+        (WITHDRAW, 'Withdrawal'),
+        (BATCH_SCHED, 'Batch Scheduling')
+    ]
+
+    concerned_department = models.CharField(choices=teams, default=NONE, max_length=30)
+    issue_type = models.CharField(choices=issues, default=OTHER_QUER, max_length=30)
+    student_name = models.IntegerField(choices=students, default=1)
+    comment = models.TextField(default='')
+    status = models.CharField(max_length=8, editable=False, default='Created')
+    opened_by = models.CharField(max_length=50, editable=False, default='None')
+    resolution = models.TextField(default='', editable=False)
+    issued_time = models.DateTimeField(editable=False,
+                                       default=timezone.now,
+                                       max_length=40)
+
+    def __str__(self):
+        return 'Ticket #{}'.format(self.id)
+
+
+class Employee(models.Model):
+    employee_id = models.IntegerField()
+    team = models.CharField(choices=teams, default=NONE, max_length=30)
+    employee_first_name = models.CharField(max_length=100, default='')
+    employee_last_name = models.CharField(max_length=50, default='')
+    join_date = models.DateField()
+    employee_designation = models.CharField(max_length=50, default='')
+    employee_secondary_role = models.CharField(max_length=50, default='', blank=True)
+    employee_DOB = models.DateField()
+    employee_experience_as_on_joining_date_in_months = models.IntegerField(default=0)
+
+    def __str__(self):
+        return '{}({})'.format(self.employee_first_name, self.employee_id)
+
+
+
