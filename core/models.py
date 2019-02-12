@@ -24,6 +24,18 @@ teams = (
     (BUSINESS_DEV_TEAM, 'Business Development Team')
 )
 
+# employee status
+INTERN = 'Intern'
+RETAINER = 'Retainer'
+PERMANENT = 'Permanent'
+
+employee_status = (
+    (NONE, NONE),
+    (INTERN, INTERN),
+    (RETAINER, RETAINER),
+    (PERMANENT, PERMANENT)
+)
+
 
 # Create your models here.
 class Ticket(models.Model):
@@ -61,6 +73,8 @@ class Ticket(models.Model):
     issued_time = models.DateTimeField(editable=False,
                                        default=timezone.now,
                                        max_length=40)
+    resolve_by = models.DateTimeField(editable=False,
+                                      default=timezone.now() + timezone.timedelta(days=1))
 
     def __str__(self):
         return 'Ticket #{}'.format(self.id)
@@ -71,11 +85,8 @@ class Employee(models.Model):
     team = models.CharField(choices=teams, default=NONE, max_length=30)
     employee_first_name = models.CharField(max_length=100, default='')
     employee_last_name = models.CharField(max_length=50, default='')
-    join_date = models.DateField()
     employee_designation = models.CharField(max_length=50, default='')
-    employee_secondary_role = models.CharField(max_length=50, default='', blank=True)
-    employee_DOB = models.DateField()
-    employee_experience_as_on_joining_date_in_months = models.IntegerField(default=0)
+    employee_status = models.CharField(choices=employee_status, default=NONE, max_length=30)
 
     def __str__(self):
         return '{}({})'.format(self.employee_first_name, self.employee_id)
