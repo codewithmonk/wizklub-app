@@ -41,7 +41,7 @@ employee_status = (
 class Ticket(models.Model):
     # issues
     students = Students.objects.all()
-    students = [(student.student_name, student.student_name) for student in students]
+    students = [(student.id, student.student_name) for student in students]
     OTHER_QUER = 'Other Queries'
     BUG = 'Bug'
     INSTRUC_ISS = 'Instructor Issue'
