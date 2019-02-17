@@ -49,8 +49,8 @@
                 <th>Deadline</th>
                 <th>Issue Type</th>
                 <th>Concerned Dept</th>
-                <th>Acknowledged By</th>
-                <th>Details</th>
+                <th>Status</th>
+                <th>Resolution Comment</th>
             </tr>
             {% for ticket in tickets %}
             <tr>
@@ -59,8 +59,8 @@
                 <td>{{ ticket.resolve_by }}</td>
                 <td>{{ ticket.issue_type }}</td>
                 <td>{{ ticket.concerned_department }}</td>
-                <td>{{ ticket.opened_by }}</td>
-                <td><a href="{% url 'ticket_detail' pk=ticket.id %}">View Info</a></td>
+                <td>{{ ticket.status }}</td>
+                <td>{{ ticket.resolution }}</td>
             </tr>
             {% endfor %}
 

@@ -41,7 +41,7 @@ employee_status = (
 class Ticket(models.Model):
     # issues
     students = Students.objects.all()
-    students = [(student.id, student.student_name) for student in students]
+    students = [(student.student_name, student.student_name) for student in students]
     OTHER_QUER = 'Other Queries'
     BUG = 'Bug'
     INSTRUC_ISS = 'Instructor Issue'
@@ -69,12 +69,13 @@ class Ticket(models.Model):
     comment = models.TextField(default='')
     status = models.CharField(max_length=8, editable=False, default='Created')
     opened_by = models.CharField(max_length=50, editable=False, default='None')
-    resolution = models.TextField(default='', editable=False)
+    resolution = models.TextField(default='', editable=True, blank=True)
     issued_time = models.DateTimeField(editable=False,
                                        default=timezone.now,
                                        max_length=40)
     resolve_by = models.DateTimeField(editable=False,
                                       default=timezone.now() + timezone.timedelta(days=1))
+    resolved_time = models.DateTimeField(editable=True, default=timezone.now)
 
     def __str__(self):
         return 'Ticket #{}'.format(self.id)

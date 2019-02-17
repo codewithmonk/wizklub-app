@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2}
+
+    th {
+      background-color: #F47E08;
+      color: white;
+    }
+    .btn {
+      background-color: #F47E08;
+      border: none;
+      color: black;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 16px;
+    }
+    .btn:hover {
+      background-color: #F47E08;
+    }
+
+
+        </style>
+    </head>
+    <body>
+    <!--We will receive >tickets< object-->
+
+        <center><h2>Pending Issue</h2></center>
+
+        <table><tr>
+    <th>Ticket No</th>
+    <th>Concerned Dept</th>
+    <th>Issue Type</th>
+    <th>Student Name</th>
+    <th>Details</th>
+    <th>Status</th>
+    <th>Opened by</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Option</th>
+    <th>Resolved On</th>
+    <th>Resolution Comments</th>
+    </tr>
+
+
+    <tr>
+    <td>{{ ticket.id }}</td>
+    <td>{{ ticket.concerned_department }}</td>
+    <td>{{ ticket.issue_type }}</td>
+    <td>{{ ticket.student_name }}</td>
+    <td>{{ ticket.comment }}</td>
+    <td>{{ ticket.status }}</td>
+    <td>{{ ticket.opened_by }}</td>
+    <td>{{ ticket.issued_time }}</td>
+    <td>{{ ticket.resolve_by }}</td>
+    <td><a href="{% url 'close_ticket' pk=ticket.id %}">Close Ticket</a></td>
+    <td>{{ ticket.resolved_time }}</td>
+    <td>{{ ticket.resolution }}</td>
+    </tr>
+    </table>
+    </body>
+</html>
