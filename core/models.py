@@ -13,6 +13,7 @@ PARENT_ENGAG_TEAM = 'Parent Engagement Team'
 OPS_TEAM = 'Operation Team'
 SALES_TEAM = 'Sales Team'
 BUSINESS_DEV_TEAM = 'Business Development Team'
+CONTENT_TEAM = 'Content Team'
 
 # creating choices for teams
 teams = (
@@ -21,7 +22,8 @@ teams = (
     (PARENT_ENGAG_TEAM, 'Parent Engagement Team'),
     (OPS_TEAM, 'Operation Team'),
     (SALES_TEAM, 'Sales Team'),
-    (BUSINESS_DEV_TEAM, 'Business Development Team')
+    (BUSINESS_DEV_TEAM, 'Business Development Team'),
+    (CONTENT_TEAM, 'Content Team')
 )
 
 # employee status
@@ -45,11 +47,12 @@ class Ticket(models.Model):
     OTHER_QUER = 'Other Queries'
     BUG = 'Bug'
     INSTRUC_ISS = 'Instructor Issue'
-    PE_ISS = 'PE Issues'
+    PE_ISS = 'PE Issue'
     APP_REL = 'App Related'
     WORK_SKILL_REL = 'Workouts/Skill Related'
     WITHDRAW = 'Withdrawal'
     BATCH_SCHED = 'Batch Scheduling'
+    CONT_ISS = 'Content Issue'
 
     # creating choices for issues
     issues = [
@@ -60,13 +63,14 @@ class Ticket(models.Model):
         (APP_REL, 'App Related'),
         (WORK_SKILL_REL, 'Workouts/Skill Related'),
         (WITHDRAW, 'Withdrawal'),
-        (BATCH_SCHED, 'Batch Scheduling')
+        (BATCH_SCHED, 'Batch Scheduling'),
+        (CONT_ISS, 'Content Issue')
     ]
 
     concerned_department = models.CharField(choices=teams, default=NONE, max_length=30)
     issue_type = models.CharField(choices=issues, default=OTHER_QUER, max_length=30)
     student_name = models.IntegerField(choices=students, default=1)
-    comment = models.TextField(default='')
+    comment = models.TextField(default='', )
     status = models.CharField(max_length=8, editable=False, default='Created')
     opened_by = models.CharField(max_length=50, editable=False, default='None')
     resolution = models.TextField(default='', editable=True, blank=True)
