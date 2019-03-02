@@ -1,46 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
+{% extends 'base.html' %}
 
-    th, td {
-      text-align: left;
-      padding: 8px;
-    }
-
-    tr:nth-child(even){background-color: #f2f2f2}
-
-    th {
-      background-color: #F47E08;
-      color: white;
-    }
-    .btn {
-      background-color: #F47E08;
-      border: none;
-      color: black;
-      padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 16px;
-    }
-    .btn:hover {
-      background-color: #F47E08;
-    }
-
-
-        </style>
-    </head>
-    <body>
     <!--We will receive >tickets< object-->
 
-        <center><h2>Pending Issue</h2></center>
+{% block title %} <center><h2>Pending Issue</h2></center> {% endblock %}
+
+
+{% block main %}
 
         <table><tr>
     <th>Ticket No</th>
@@ -57,6 +22,9 @@
     <th>Resolution Comments</th>
     </tr>
 
+{% endblock %}
+
+    {% block sidebar %}
 
     <tr>
     <td>{{ ticket.id }}</td>
@@ -73,5 +41,5 @@
     <td>{{ ticket.resolution }}</td>
     </tr>
     </table>
-    </body>
-</html>
+
+    {% endblock %}

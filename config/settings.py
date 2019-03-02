@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'instructor',
     'students',
+    'instructor',
     'core',
 ]
 
@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wizklub',
+        'NAME': 'wizklub2',
         'USER': 'wizklub_admin',
         'PASSWORD': 'Machine@1983',
         'HOST': '127.0.0.1',
