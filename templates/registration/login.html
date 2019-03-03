@@ -1,0 +1,11 @@
+{% extends 'base_login_logout.html' %}
+
+{% block content %}
+    <form method="post">
+        <div class="form-group">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+    <!--We will receive >tickets< object-->
+
+{% block title %} <center><h2>Closed Tickets</h2></center> {% endblock %}
+
+
+{% block main %}
+     <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Ticket No</th>
+                <th>Issue Date</th>
+                <th>Deadline</th>
+                <th>Issue Type</th>
+                <th>Concerned Dept</th>
+                <th>Status</th>
+                <th>Resolution Comment</th>
+            </tr>
+        </thead>
+        {% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket.id }}</td>
+            <td>{{ ticket.issued_time }}</td>
+            <td>{{ ticket.resolve_by }}</td>
+            <td>{{ ticket.issue_type }}</td>
+            <td>{{ ticket.concerned_department }}</td>
+            <td>{{ ticket.status }}</td>
+            <td>{{ ticket.resolution }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

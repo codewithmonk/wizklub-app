@@ -3,25 +3,22 @@
     <!--We will receive >tickets< object-->
 
 
-{% block title %} <center><h2>Pending Issue</h2></center> {% endblock %}
+{% block title %} <center><h2>Pending Issues</h2></center> {% endblock %}
 
 {% block main %}
 
-        <table>
-            <tr>
-                <th>Ticket No</th>
-                <th>Issue Date</th>
-                <th>Deadline</th>
-                <th>Issue Type</th>
-                <th>Concerned Dept</th>
-                <th>Acknowledged By</th>
-                <th>Details</th>
-            </tr>
-
-{% endblock %}
-
-    {% block sidebar %}
-
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Ticket No</th>
+                    <th>Issue Date</th>
+                    <th>Deadline</th>
+                    <th>Issue Type</th>
+                    <th>Concerned Dept</th>
+                    <th>Acknowledged By</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
             {% for ticket in tickets %}
             <tr>
                 <td>{{ ticket.id }}</td>
@@ -33,7 +30,6 @@
                 <td><a href="{% url 'ticket_detail' pk=ticket.id %}">View Info</a></td>
             </tr>
             {% endfor %}
-
         </table>
 
-    {% endblock %}
+{% endblock %}

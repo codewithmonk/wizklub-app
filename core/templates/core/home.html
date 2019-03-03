@@ -1,28 +1,25 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
+    <!--We will receive >tickets< object-->
+
+{% block title %}
+
+	<center><h2>Home</h2></center>
+
+{% endblock %}
 
 {% load static %}
 
-<html>
-<head>
+{% block main %}
 
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="{% static 'css/core.css' %}">
+	<form><br><br><br><br>
+		<center><h1><u> Support Interface</u></h1></center> <br><br><br><br>
+		<div>
+			<center>
+				<a class="btn" href="unresolved">Pending Issue</a>
+				<a class="btn" href="closed">Resolved Issue</a>
+			</center>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-</head>
-<body>
-
-<form action="/action_page.php"><br><br><br><br>
-<center><h1><u> Support Interface</u></h1></center> <br><br><br><br>
-<div>
-	<center>
-	    <a class="btn" href="unresolved">Pending Issue</a>
-	    <a class="btn" href="resolvedissue.html">Resolved Issue</a>
-	</center>
-
-</div>
-</form>
-</body>
-</html>
+		</div>
+	</form>
+{% endblock %}

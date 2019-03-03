@@ -41,7 +41,6 @@ employee_status = (
 
 # Create your models here.
 class Ticket(models.Model):
-    # issues
     students = Students.objects.all()
     students = [(student.id, student.student_name) for student in students]
     OTHER_QUER = 'Other Queries'
