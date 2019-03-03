@@ -42,7 +42,8 @@ employee_status = (
 # Create your models here.
 class Ticket(models.Model):
     students = Students.objects.all()
-    students = [(student.id, student.student_name) for student in students]
+    students = [(student.student_name, student.student_name) for student in students]
+    students = tuple(students)
     OTHER_QUER = 'Other Queries'
     BUG = 'Bug'
     INSTRUC_ISS = 'Instructor Issue'
@@ -68,7 +69,7 @@ class Ticket(models.Model):
 
     concerned_department = models.CharField(choices=teams, default=NONE, max_length=30)
     issue_type = models.CharField(choices=issues, default=OTHER_QUER, max_length=30)
-    student_name = models.IntegerField(choices=students, default=1)
+    student_name = models.CharField(choices=students, default="NONE", max_length=30)
     comment = models.TextField(default='', )
     status = models.CharField(max_length=8, editable=False, default='Created')
     opened_by = models.CharField(max_length=50, editable=False, default='None')
