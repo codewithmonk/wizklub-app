@@ -41,6 +41,15 @@ employee_status = (
 
 # Create your models here.
 class Ticket(models.Model):
+    # class Meta:
+    #     permissions = (
+    #         ("tech_team_access", "permissions for tech team"),
+    #         ("parent_engagement_team", "permissions for parent engagement team"),
+    #         ("ops_team_access", "permissions for operations team"),
+    #         ("sales_team_access", "permissions for sales team"),
+    #         ("business_dev_team_access", "permissions for business development team"),
+    #         ("content_team_access", "permissions for content team"),
+    #     )
     students = Students.objects.all()
     students = [(student.student_name, student.student_name) for student in students]
     students = tuple(students)

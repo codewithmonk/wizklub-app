@@ -30,7 +30,7 @@ def show_closed_tickets(request):
     return render(request, 'core/closed_tickets.html', {'tickets': tickets})
 
 
-@permission_required('ticket.view_ticket', login_url="/accounts/login")
+@permission_required('ticket.change_ticket', login_url="/accounts/login")
 def close_ticket(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk)
     if request.method == "POST":
@@ -43,6 +43,9 @@ def close_ticket(request, pk):
             return redirect('show_closed_tickets')
     else:
         form = TicketForm(instance=ticket)
-    return render(request, 'core/close_ticket.html', {'form': form})
+    return render(request, 'core/close_ticket.html', {'form': form, 'ticket': ticket})
+
+
+# @permission_required('ticket')
 
 

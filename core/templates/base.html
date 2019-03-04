@@ -1,5 +1,5 @@
+<!DOCTYPE html>
 {% load static %}
-
 <html>
 <head>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -11,6 +11,7 @@
 
     <div class="topnav">
       <div class="topnav-right">
+          <a href="/">Home</a>
         {% if user.is_authenticated %}
                 <a href="/accounts/logout">Logout</a>
           {% else %}
