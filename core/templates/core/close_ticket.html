@@ -6,7 +6,6 @@
 
 {% block main %}
     <form class="form-group" method="POST">{% csrf_token %}
-        <!--{{ form.as_p }}-->
         <div class="container" id="comment_section">
         {% for field in form %}
             <label>
