@@ -1,20 +1,18 @@
 {% extends 'base.html' %}
-{% block title %}
-    <center><h2>Close Ticket No {{ ticket.id }} </h2></center>
-    <!--We will receive >tickets< object-->
-{% endblock %}
 
 {% block main %}
+<h2>Close Ticket No {{ ticket.id }} </h2><hr>
     <form class="form-group" method="POST">{% csrf_token %}
         <div class="container" id="comment_section">
         {% for field in form %}
             <label>
                 {{ field.label }}
             </label>
-            <textarea id="{{ field.name }}" class="form-control" required></textarea>
+            <textarea name="{{ field.name }}" id="id_{{ field.name }}" for="id_{{ field.name }}" class="form-control" required></textarea>
         {% endfor %}
             <hr>
             <button class="btn btn-primary" type="submit">Close</button>
         </div>
     </form>
+
 {% endblock %}

@@ -88,7 +88,7 @@ class Ticket(models.Model):
                                        max_length=40)
     resolve_by = models.DateTimeField(editable=False,
                                       default=timezone.now() + timezone.timedelta(days=1))
-    resolved_time = models.DateTimeField(editable=True, default=timezone.now)
+    resolved_time = models.DateTimeField(editable=False, default=timezone.now)
 
     def __str__(self):
         return 'Ticket #{}'.format(self.id)

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'students',
     'instructor',
     'core',
+    'users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,5 @@ LOGIN_REDIRECT_URL = '/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "core/static"),
 ]
+
+AUTH_USER_MODEL = "users.CustomUser"
