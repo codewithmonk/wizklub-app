@@ -7,12 +7,26 @@ from django.contrib.auth.decorators import login_required
 from students.models import Students
 from django.http import JsonResponse
 import sys
+from django.utils import timezone
 sys.path.append('../students')
+
+
+team_deadlines = {
+    'Technical Team': 2,
+    'Parent Engagement Team': 3,
+    'Operation Team': 5,
+    'Sales Team': 2,
+    'Business Development Team': 1,
+    'Content Team': 1
+}
 
 
 # @permission_required('ticket.view_ticket', login_url="/accounts/login")
 @login_required
 def show_tickets(request):
+    if request.user.username == "wizklub_admin":
+        tickets = Ticket.objects.filter(status="Created")
+        return render(request, 'core/unresolved.html', {'tickets': tickets})
     tickets = Ticket.objects.filter(status="Created", concerned_department=request.user.get_role_display())
     return render(request, 'core/unresolved.html', {'tickets': tickets})
 
@@ -45,6 +59,7 @@ def close_ticket(request, pk):
             ticket = form.save(commit=False)
             ticket.resolved_time = timezone.now()
             ticket.status = "Closed"
+            ticket.closed_by= request.user.username
             ticket.save()
             return redirect('show_closed_tickets')
     else:
@@ -74,6 +89,7 @@ def create_ticket(request):
             ticket = form.save(commit=False)
             ticket.issued_time = timezone.now()
             ticket.opened_by = request.user
+            ticket.resolve_by = timezone.now() + timezone.timedelta(days=team_deadlines[ticket.concerned_department])
             ticket.save()
             return redirect('/unresolved/')
         else:

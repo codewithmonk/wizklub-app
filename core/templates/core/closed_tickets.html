@@ -3,11 +3,12 @@
     <!--We will receive >tickets< object-->
 
 {% block title %}Closed Tickets{% endblock %}
+{% block feature %}Closed Tickets {% endblock %}
 
 
 {% block main %}
      <table class="table table-hover">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th>Ticket No</th>
                 <th>Issue Date</th>
@@ -15,6 +16,7 @@
                 <th>Issue Type</th>
                 <th>Concerned Dept</th>
                 <th>Status</th>
+                <th>Closed By</th>
                 <th>Resolution Comment</th>
             </tr>
         </thead>
@@ -26,6 +28,7 @@
             <td>{{ ticket.issue_type }}</td>
             <td>{{ ticket.concerned_department }}</td>
             <td>{{ ticket.status }}</td>
+            <td>{{ ticket.closed_by }}</td>
             <td>{{ ticket.resolution }}</td>
         </tr>
         {% endfor %}

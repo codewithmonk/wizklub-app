@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-
+{% block feature %} Close Ticket {% endblock %}
 {% block main %}
-<h2>Close Ticket No {{ ticket.id }} </h2><hr>
+<center><h3>Ticket No {{ ticket.id }} </h3><hr></center>
     <form class="form-group" method="POST">{% csrf_token %}
         <div class="container" id="comment_section">
         {% for field in form %}

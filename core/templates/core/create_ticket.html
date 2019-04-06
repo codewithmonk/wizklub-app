@@ -1,13 +1,30 @@
 {% extends 'base.html' %}
 {% block title %} Log Ticket {% endblock %}
+{% block feature %} Create Ticket {% endblock %}
 {% block main %}
-
-
-
 <div class="container">
-    <form class="form-group", method="POST">{% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Create</button>
-    </form>
+<form class="form-goup" method="POST">{% csrf_token %}
+    <br>
+    <table>
+    {% for field in form %}
+        <tr>
+            <td>
+                <label>
+                        {{ field.label }}
+                </label>
+                </td>
+            <td>
+        &nbsp&nbsp&nbsp{{ field }}
+            </td>
+        </tr>
+    {% endfor %}
+        <tr colspan="2">
+            <td>
+                <button class="btn btn-primary" type="submit">Create</button>
+            </td>
+        </tr>
+    </table>
+
+</form>
 </div>
 {% endblock %}

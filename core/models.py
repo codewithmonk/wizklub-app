@@ -79,6 +79,7 @@ class Ticket(models.Model):
     concerned_department = models.CharField(choices=teams, default=NONE, max_length=30)
     issue_type = models.CharField(choices=issues, default=OTHER_QUER, max_length=30)
     student_name = models.CharField(choices=students, default="NONE", max_length=30)
+    current_skill = models.CharField(default='', max_length=30)
     comment = models.TextField(default='', )
     status = models.CharField(max_length=8, editable=False, default='Created')
     opened_by = models.CharField(max_length=50, editable=False, default='None')
@@ -89,6 +90,7 @@ class Ticket(models.Model):
     resolve_by = models.DateTimeField(editable=False,
                                       default=timezone.now() + timezone.timedelta(days=1))
     resolved_time = models.DateTimeField(editable=False, default=timezone.now)
+    closed_by = models.CharField(max_length=50, editable=False, default='None')
 
     def __str__(self):
         return 'Ticket #{}'.format(self.id)
