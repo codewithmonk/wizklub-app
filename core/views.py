@@ -46,7 +46,7 @@ def ticket_detail(request, pk):
 @login_required
 def show_closed_tickets(request):
     tickets = Ticket.objects.filter(status="Closed")
-    return render(request, 'core/closed_tickets.html', {'tickets': tickets})
+    return render(request, 'core/closed_tickets.html', {'tickets': tickets,})
 
 
 # @permission_required('ticket.change_ticket', login_url="/accounts/login")
