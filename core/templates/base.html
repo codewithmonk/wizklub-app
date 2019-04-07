@@ -31,12 +31,13 @@
         </div>
         <div class="topnav-right">
             {% if user.is_authenticated %}
-                <a href="#">Logged in as: {% block user %}{{ user.username }}{% endblock %}</a>
-                <a href="/accounts/logout">Logout</a>
                 {% if user.get_role_display != 'admin' %}
                     <a href="/unresolved/">Pending
                     <span id="notification_value" class="badge badge-primary"> {% block ticket_count %}{% endblock %}</span></a>
                 {% endif %}
+                <a href="#">Logged in as: {% block user %}{{ user.username }}{% endblock %}</a>
+                <a href="/accounts/logout">Logout</a>
+
             {% else %}
                 <a href="/accounts/login">Login</a>
             {% endif %}
