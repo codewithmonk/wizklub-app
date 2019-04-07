@@ -9,6 +9,8 @@ from django.http import JsonResponse
 import sys
 from django.utils import timezone
 sys.path.append('../students')
+sys.path.append('../users')
+from collections import namedtuple
 
 
 team_deadlines = {
@@ -21,32 +23,45 @@ team_deadlines = {
 }
 
 
+def get_ticket_info(request):
+    ticket = namedtuple("ticket", "tickets tickets_count")
+    tickets = Ticket.objects.filter(status="Created", concerned_department=request.user.get_role_display())
+    count = len(tickets)
+    return ticket(tickets=tickets, tickets_count=count)
+
+
 # @permission_required('ticket.view_ticket', login_url="/accounts/login")
 @login_required
 def show_tickets(request):
     if request.user.username == "wizklub_admin":
         tickets = Ticket.objects.filter(status="Created")
         return render(request, 'core/unresolved.html', {'tickets': tickets})
-    tickets = Ticket.objects.filter(status="Created", concerned_department=request.user.get_role_display())
-    return render(request, 'core/unresolved.html', {'tickets': tickets})
+    tickets = get_ticket_info(request).tickets
+    tickets_count = len(tickets)
+    return render(request, 'core/unresolved.html', {'tickets': tickets, 'ticket_count': tickets_count})
 
 
+@login_required
 def show_options(request):
-    return render(request, 'core/home.html', {})
+    tickets_count = get_ticket_info(request).tickets_count
+    print(tickets_count)
+    return render(request, 'core/home.html', {"ticket_count": tickets_count})
 
 
 # @permission_required('ticket.view_ticket', login_url="/accounts/login")
 @login_required
 def ticket_detail(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk,)
-    return render(request, 'core/ticket_detail.html', {'ticket': ticket})
+    return render(request, 'core/ticket_detail.html', {'ticket': ticket, "ticket_count": get_ticket_info(
+        request).tickets_count})
 
 
 # @permission_required('ticket.view_ticket', login_url="/accounts/login")
 @login_required
 def show_closed_tickets(request):
     tickets = Ticket.objects.filter(status="Closed")
-    return render(request, 'core/closed_tickets.html', {'tickets': tickets,})
+    return render(request, 'core/closed_tickets.html', {'tickets': tickets, "ticket_count": get_ticket_info(
+        request).tickets_count})
 
 
 # @permission_required('ticket.change_ticket', login_url="/accounts/login")
@@ -59,12 +74,13 @@ def close_ticket(request, pk):
             ticket = form.save(commit=False)
             ticket.resolved_time = timezone.now()
             ticket.status = "Closed"
-            ticket.closed_by= request.user.username
+            ticket.closed_by = request.user.username
             ticket.save()
             return redirect('show_closed_tickets')
     else:
         form = TicketForm(instance=ticket)
-    return render(request, 'core/close_ticket.html', {'form': form, 'ticket': ticket})
+    return render(request, 'core/close_ticket.html', {'form': form, 'ticket': ticket, "ticket_count": get_ticket_info(
+        request).tickets_count})
 
 
 # @permission_required('ticket.add_ticket', login_url="/accounts/login")

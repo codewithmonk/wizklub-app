@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
-    <!--We will receive >tickets< object-->
+    <!--      We will receive >tickets< object, >count<         -->
 
 
 {% block title %}Pending Issues{% endblock %}
+{% block ticket_count %} {{ ticket_count }} {%endblock%}
 {% block main %}
 
         <table class="table table-hover">
