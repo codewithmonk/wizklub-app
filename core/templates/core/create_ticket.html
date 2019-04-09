@@ -1,6 +1,38 @@
 {% extends 'base.html' %}
 {% block title %} Log Ticket {% endblock %}
+{% block javascript %}
+    <script>
+        $(document).ready(function(){
+            $("#submit_ticket").attr("disabled", true);
+        });
+
+        $(document).ready(function(){
+            $("#id_student_id").focusout(function(){
+                var id = $("#id_student_id").val();
+                $.ajax({
+                    url: '/ajax/validate_student_id/',
+                    data: {
+                      'id': id
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                      if (data.present) {
+                        $("#submit_ticket").attr("disabled", false);
+                      } else{
+                        $("#submit_ticket").attr("disabled", true);
+                        alert(data.error_message)
+                      }
+                    }
+                  });
+
+            });
+        })
+
+    </script>
+{% endblock %}
 {% block main %}
+
+
 <div class="container">
 <form class="form-goup" method="POST">{% csrf_token %}
     <br>
@@ -13,13 +45,13 @@
                 </label>
                 </td>
             <td>
-        &nbsp&nbsp&nbsp{{ field }}
+        &nbsp;&nbsp;&nbsp;{{ field }}
             </td>
         </tr>
     {% endfor %}
         <tr colspan="2">
             <td>
-                <button class="btn btn-primary" type="submit">Create</button>
+                <button class="btn btn-primary" type="submit" id="submit_ticket">Create</button>
             </td>
         </tr>
     </table>

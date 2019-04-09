@@ -8,5 +8,6 @@ urlpatterns = [
     path('unresolved/<int:pk>/', views.ticket_detail, name='ticket_detail'),
     path('unresolved/<int:pk>/close/', views.close_ticket, name='close_ticket'),
     path('closed', views.show_closed_tickets, name='show_closed_tickets'),
-    path('create/', views.create_ticket, name="create_ticket")
+    path('create/', views.create_ticket, name="create_ticket"),
+    path('ajax/validate_student_id/', views.validate_student_id, name="validate_student_id")
 ]

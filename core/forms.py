@@ -12,7 +12,7 @@ class TicketForm(forms.ModelForm):
 class NewTicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
-        fields = ('concerned_department', 'issue_type', 'student_name', 'current_skill', 'comment')
+        fields = ('concerned_department', 'issue_type', 'student_id', 'current_skill', 'comment')
 
 
 

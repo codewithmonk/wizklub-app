@@ -93,17 +93,15 @@ def close_ticket(request, pk):
 
 
 # @permission_required('ticket.add_ticket', login_url="/accounts/login")
-@login_required
-def get_student_name(request):
-    student = None
-    try:
-        student = Students.objects.get(id__exact=request.Get.get("id"))
-    except Exception as e:
-        pass
-    if student is None:
-        return JsonResponse({"name": ''})
-    else:
-        return JsonResponse({"name": student.student_name})
+# @login_required
+def validate_student_id(request):
+    student_id = request.GET.get('id', None)
+    data = {
+        "present": Students.objects.filter(id__iexact=student_id).exists()
+    }
+    if not data["present"]:
+        data["error_message"] = "Student with this id doesn't exists! Enter proper id to submit this data"
+    return JsonResponse(data)
 
 
 @permission_required('ticket.add_ticket', login_url="/user_not_permitted/")

@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'students',
     'instructor',
     'core',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'dajaxice',
+    'dajax',
 ]
 
 MIDDLEWARE = [

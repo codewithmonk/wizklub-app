@@ -31,7 +31,7 @@
         </div>
         <div class="topnav-right">
             {% if user.is_authenticated %}
-                {% if user.get_role_display != 'admin' %}
+                {% if not user.is_superuser %}
                     <a href="/unresolved/">Pending
                     <span id="notification_value" class="badge badge-primary"> {% block ticket_count %}{% endblock %}</span></a>
                 {% endif %}
@@ -58,5 +58,6 @@
             <td></td>
     </tr>
     {% endblock %}
+{% block javascript %} {% endblock %}
 </body>
 </html>

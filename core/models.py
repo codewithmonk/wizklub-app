@@ -78,7 +78,8 @@ class Ticket(models.Model):
 
     concerned_department = models.CharField(choices=teams, default=NONE, max_length=30)
     issue_type = models.CharField(choices=issues, default=OTHER_QUER, max_length=30)
-    student_name = models.CharField(choices=students, default="NONE", max_length=30)
+    # student_name = models.CharField(choices=students, default="NONE", max_length=30)
+    student_id = models.IntegerField(default=0)
     current_skill = models.CharField(default='', max_length=30)
     comment = models.TextField(default='', )
     status = models.CharField(max_length=8, editable=False, default='Created')
