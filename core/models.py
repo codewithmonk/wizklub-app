@@ -91,6 +91,7 @@ class Ticket(models.Model):
                                       default=timezone.now() + timezone.timedelta(days=1))
     resolved_time = models.DateTimeField(editable=False, default=timezone.now)
     closed_by = models.CharField(max_length=50, editable=False, default='None')
+    assigned_to = models.CharField(max_length=50, editable=False, default='None')
 
     def __str__(self):
         return 'Ticket #{}'.format(self.id)

@@ -11,6 +11,8 @@ from django.utils import timezone
 sys.path.append('../students')
 sys.path.append('../users')
 from collections import namedtuple
+from users.models import CustomUser
+from operator import itemgetter
 
 
 team_deadlines = {
@@ -21,6 +23,13 @@ team_deadlines = {
     'Business Development Team': 1,
     'Content Team': 1
 }
+
+
+def assign_user(role):
+    users = CustomUser.objects.filter(role=role)
+    user_ticket_info = [(user, len(Ticket.objects.filter(assigned_to=user))) for user in users]
+    user_ticket_info = sorted(user_ticket_info, key=itemgetter(1))
+    return user_ticket_info[0][0]
 
 
 def get_ticket_info(request):
@@ -91,7 +100,7 @@ def get_student_name(request):
         student = Students.objects.get(id__exact=request.Get.get("id"))
     except Exception as e:
         pass
-    if student == None:
+    if student is None:
         return JsonResponse({"name": ''})
     else:
         return JsonResponse({"name": student.student_name})
@@ -103,6 +112,7 @@ def create_ticket(request):
         form = NewTicketForm(request.POST)
         if form.is_valid():
             ticket = form.save(commit=False)
+            ticket.assigned_to = assign_user(ticket.concerned_department)
             ticket.issued_time = timezone.now()
             ticket.opened_by = request.user
             ticket.resolve_by = timezone.now() + timezone.timedelta(days=team_deadlines[ticket.concerned_department])

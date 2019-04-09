@@ -15,6 +15,7 @@
                     <th>Deadline</th>
                     <th>Issue Type</th>
                     <th>Concerned Dept</th>
+                    <th>Assigned To</th>
                     <th>Details</th>
                 </tr>
             </thead>
@@ -25,6 +26,7 @@
                 <td>{{ ticket.resolve_by }}</td>
                 <td>{{ ticket.issue_type }}</td>
                 <td>{{ ticket.concerned_department }}</td>
+                <td>{{ ticket.assigned_to }}</td>
                 <td><a href="{% url 'ticket_detail' pk=ticket.id %}">View Info</a></td>
             </tr>
             {% endfor %}
